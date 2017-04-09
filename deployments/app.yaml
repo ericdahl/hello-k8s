@@ -12,10 +12,9 @@ spec:
       containers:
       - name: app
         image: gcr.io/striped-weaver-161318/hello-k8s-app
-#        livenessProbe:
-#          httpGet:
-#            path: /health
-#            port: 5000
+        livenessProbe:
+          httpGet:
+            path: /health
         ports:
           - containerPort: 8080
 #        resources:
