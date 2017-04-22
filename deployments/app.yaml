@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: app-deployment
 spec:
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
@@ -23,3 +23,10 @@ spec:
             memory: 512Mi
           requests:
             memory: 256Mi
+        env:
+          - name: SPRING_DATASOURCE_URL
+            value: jdbc:postgresql://postgres-service/numbers
+          - name: SPRING_DATASOURCE_USERNAME
+            value: postgres
+          - name: SPRING_DATASOURCE_PASSWORD
+            value: pw

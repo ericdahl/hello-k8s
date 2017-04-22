@@ -1,6 +1,8 @@
 package example;
 
 import ch.qos.logback.access.jetty.RequestLogImpl;
+import example.dao.NumberRepository;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
@@ -18,7 +20,7 @@ public class App {
     @Bean
     public EmbeddedServletContainerCustomizer embeddedServletContainerCustomizer() {
         return customizer -> {
-            if (customizer instanceof  JettyEmbeddedServletContainerFactory) {
+            if (customizer instanceof JettyEmbeddedServletContainerFactory) {
                 final JettyEmbeddedServletContainerFactory jettyCustomizer = (JettyEmbeddedServletContainerFactory) customizer;
                 jettyCustomizer.addServerCustomizers((JettyServerCustomizer) server -> {
                     final RequestLogImpl requestLog = new RequestLogImpl();
@@ -27,6 +29,13 @@ public class App {
                     server.setRequestLog(requestLog);
                 });
             }
+        };
+    }
+
+    @Bean
+    public CommandLineRunner initializeNumber(NumberRepository repository) {
+        return (args) -> {
+            repository.save(new example.dao.Number(2, true));
         };
     }
 }

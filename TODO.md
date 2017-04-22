@@ -1,0 +1,7 @@
+- means of killing instance for testing
+- replace jpa with k8s ddl job?
+- app utilize postgres
+- redis
+- redis sentinel?
+- elasticsearch?
+- tune Dockerfiles ?
